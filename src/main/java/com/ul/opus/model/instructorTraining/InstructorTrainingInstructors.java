@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -28,6 +30,9 @@ public class InstructorTrainingInstructors {
     @Column(name="description")
     private String description;
 
-    @Column(name="blobImg")
-    private String blobImg;
+    @Column(name="imagePath")
+    private String imagePath;
+
+    @ManyToMany(mappedBy = "instructors")
+    private Set<InstructorTrainingDetailsInfo> instructorTrainingDetailsInfos = new HashSet<>();
 }

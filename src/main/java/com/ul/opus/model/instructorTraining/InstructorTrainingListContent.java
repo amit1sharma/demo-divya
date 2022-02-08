@@ -21,4 +21,8 @@ public class InstructorTrainingListContent {
     @Column(name="listItem")
     private String listItem;
 
+    @ManyToOne
+    @JoinColumn(name="ilt_details_section_id", nullable=false)
+    private InstructorTrainingDetailsSection instructorTrainingDetailsSection;
+
 }

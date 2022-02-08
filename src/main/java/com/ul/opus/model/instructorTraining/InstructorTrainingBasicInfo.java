@@ -7,7 +7,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -29,8 +31,8 @@ public class InstructorTrainingBasicInfo {
     @Column(name="validityType")
     private String validityType;
 
-    @Column(name="blobIcon")
-    private String blobIcon;
+    @Column(name="iconPath")
+    private String iconPath;
 
     @Column(name="trainingPlace")
     private String trainingPlace;
@@ -39,10 +41,10 @@ public class InstructorTrainingBasicInfo {
     @JoinColumn(name = "planId", referencedColumnName = "id")
     private MarketPlacePremiumPlan plan;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+    @ManyToMany(fetch=FetchType.LAZY)
     @JoinTable(name = "ilt_basicInfo_tags_mapping", joinColumns = @JoinColumn(name="iltBasicInfoId"),
     inverseJoinColumns = @JoinColumn(name="iltTagId"))
-    private List<InstructorTrainingTags> tags = new ArrayList<>();
+    private Set<InstructorTrainingTags> tags = new HashSet<>();
 
     @OneToOne
     @JoinColumn(name = "iltDetailsInfoId", referencedColumnName = "id")

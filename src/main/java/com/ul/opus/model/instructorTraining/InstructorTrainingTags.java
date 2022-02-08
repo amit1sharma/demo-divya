@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -23,5 +25,8 @@ public class InstructorTrainingTags {
 
     @Column(name="colorCode")
     private String colorCode;
+
+    @ManyToMany(mappedBy = "tags")
+    private Set<InstructorTrainingBasicInfo> instructorTrainingBasicInfos = new HashSet<>();
 
 }

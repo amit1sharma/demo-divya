@@ -7,7 +7,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -30,10 +32,10 @@ public class InstructorTrainingDetailsInfo {
     private InstructorTrainingDetailsSection courseAgendaDetailsSection;
 
 
-    @OneToMany(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+    @ManyToMany(fetch=FetchType.LAZY)
     @JoinTable(name = "ilt_detailsInfo_instructors_mapping", joinColumns = @JoinColumn(name="iltDetailsId"),
             inverseJoinColumns = @JoinColumn(name="iltInstructorId"))
-    private List<InstructorTrainingInstructors> instructors = new ArrayList<>();
+    private Set<InstructorTrainingInstructors> instructors = new HashSet<>();
 
     @Column(name="relatedCourseTitle")
     private String relatedCourseTitle;

@@ -7,7 +7,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -26,10 +28,8 @@ public class InstructorTrainingDetailsSection {
     @Column(name="header")
     private String header;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
-    @JoinTable(name = "ilt_detailsSection_middleListContent_mapping", joinColumns = @JoinColumn(name="iltDetailsSectionId"),
-            inverseJoinColumns = @JoinColumn(name="iltListId"))
-    private List<InstructorTrainingListContent> middleListContent = new ArrayList<>();
+    @OneToMany(fetch=FetchType.LAZY, mappedBy = "instructorTrainingDetailsSection")
+    private Set<InstructorTrainingListContent> middleListContent = new HashSet<>();
 
     @Column(name="footer")
     private String footer;
