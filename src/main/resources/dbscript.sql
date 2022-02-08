@@ -27,8 +27,8 @@ create table ilt_instructors
 (
 	id int identity
 		primary key,
-	blobImg varchar(255),
 	description varchar(255),
+	imagePath varchar(255),
 	name varchar(255),
 	position varchar(255)
 )
@@ -40,10 +40,9 @@ create table ilt_detailsInfo_instructors_mapping
 		constraint FKcgjbqbcetod0g6eaig0jyanuo
 			references ilt_details_info,
 	iltInstructorId int not null
-		constraint UK_q59kiti2kvc5uf55s06lcc9we
-			unique
 		constraint FKo9ekqcxfqmdqwjjcg8ust1q4b
-			references ilt_instructors
+			references ilt_instructors,
+	primary key (iltDetailsId, iltInstructorId)
 )
 go
 
@@ -51,20 +50,10 @@ create table ilt_middle_list_content
 (
 	id int identity
 		primary key,
-	listItem varchar(255)
-)
-go
-
-create table ilt_detailsSection_middleListContent_mapping
-(
-	iltDetailsSectionId int not null
-		constraint FK1dlb50dhvsmbeh832cmh0vjp2
-			references ilt_details_section,
-	iltListId int not null
-		constraint UK_8e3fe8hs6fdpr0uhcm0ymoxc8
-			unique
-		constraint FKbd9srew1ft6kvsjy0ajl2lqch
-			references ilt_middle_list_content
+	listItem varchar(255),
+	ilt_details_section_id int not null
+		constraint FKrokt2gr88nyo4kwigq1db3v8o
+			references ilt_details_section
 )
 go
 
@@ -95,8 +84,8 @@ create table ilt_basic_info
 (
 	id int identity
 		primary key,
-	blobIcon varchar(255),
 	courseType varchar(255),
+	iconPath varchar(255),
 	trainingName varchar(255),
 	trainingPlace varchar(255),
 	validityType varchar(255),
@@ -115,8 +104,9 @@ create table ilt_basicInfo_tags_mapping
 		constraint FKodqxbk1rh2k7qt7rvw89ee6dw
 			references ilt_basic_info,
 	iltTagId int not null
-		constraint UK_clofk465ndau1ijnwrqeqbupd
-			unique
 		constraint FKlx6m06me47l9nwa3rgs9kpp9a
-			references ilt_tag
+			references ilt_tag,
+	primary key (iltBasicInfoId, iltTagId)
 )
+go
+
